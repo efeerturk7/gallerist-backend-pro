@@ -1,5 +1,6 @@
 package com.efeerturk.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -8,10 +9,10 @@ import lombok.*;
 @AllArgsConstructor
 public class DtoGalleristIU{
 
-	@NotNull
+	@NotBlank
 	private String firstName;
 	
-	@NotNull
+	@NotBlank
 	private String lastName;
 	
 	@NotNull

@@ -17,31 +17,15 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Car extends BaseEntity{
-
-
-	private String plate;
-	
-
-	private String brand;
-	
-
-	private String model;
-	
-
-	private Integer productionYear;
-	
-
-	private BigDecimal price;
-	
-
-	@Enumerated(EnumType.STRING)
-	private CurrencyType currencyType;
-	
-
-	private BigDecimal damagePrice;
-	
-
-	@Enumerated(EnumType.STRING)
-	private CarStatusType carStatusType;
+public class Car extends BaseEntity {
+    private String plate;
+    private String brand;
+    private String model;
+    private Integer productionYear;
+    private BigDecimal price;
+    @Enumerated(EnumType.STRING)
+    private CurrencyType currencyType;
+    private BigDecimal damagePrice;
+    @Enumerated(EnumType.STRING)
+    private CarStatusType carStatusType;
 }

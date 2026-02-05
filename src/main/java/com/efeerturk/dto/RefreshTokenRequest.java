@@ -1,5 +1,6 @@
 package com.efeerturk.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
@@ -8,6 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 public class RefreshTokenRequest {
 
-	@NotEmpty
+	@NotBlank
 	private String refreshToken;
 }

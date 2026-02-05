@@ -14,7 +14,7 @@ import lombok.Setter;
 public class DtoCarIU {
 
 	@NotNull
-	private String plaka;
+	private String plate;
 	
 	@NotNull
 	private String brand;

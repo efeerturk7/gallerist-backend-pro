@@ -1,5 +1,6 @@
 package com.efeerturk.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.Getter;
@@ -8,15 +9,15 @@ import lombok.Setter;
 @Data
 public class DtoAddressIU {
 
-	@NotEmpty
+	@NotBlank
 	private String city;
 	
-	@NotEmpty
+	@NotBlank
 	private String district;
 	
-	@NotEmpty
+	@NotBlank
 	private String neighborhood;
 	
-	@NotEmpty
+	@NotBlank
 	private String street;
 }

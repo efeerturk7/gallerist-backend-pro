@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import com.efeerturk.enums.CurrencyType;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.Getter;
@@ -12,10 +13,10 @@ import lombok.Setter;
 @Data
 public class DtoAccountIU {
 
-	@NotNull
+	@NotBlank
 	private String accountNo;
 	
-	@NotNull
+	@NotBlank
 	private String iban;
 	
 	@NotNull

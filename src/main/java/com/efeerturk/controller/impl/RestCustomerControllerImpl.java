@@ -1,10 +1,9 @@
 package com.efeerturk.controller.impl;
 
+import com.efeerturk.utils.RestPageableEntity;
+import com.efeerturk.utils.RestPageableRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.efeerturk.controller.IRestCustomerController;
 import com.efeerturk.controller.RestBaseController;
@@ -26,6 +25,12 @@ public class RestCustomerControllerImpl extends RestBaseController implements IR
 	@Override
 	public RootEntity<DtoCustomer> saveCustomer(@Valid @RequestBody DtoCustomerIU dtoCustomerIU) {
 		return ok(customerService.saveCustomer(dtoCustomerIU));
+	}
+
+    @GetMapping("/findAll")
+	@Override
+	public RootEntity<RestPageableEntity<DtoCustomer>> findAllPageable(@Valid @ModelAttribute RestPageableRequest request) {
+		return ok(customerService.findAllPageable(toPageable(request)));
 	}
 
 }

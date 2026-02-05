@@ -1,16 +1,19 @@
 package com.efeerturk.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
+import com.efeerturk.dto.*;
+import com.efeerturk.utils.PagerUtil;
+import com.efeerturk.utils.RestPageableEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.efeerturk.dto.DtoAccount;
-import com.efeerturk.dto.DtoAddress;
-import com.efeerturk.dto.DtoCustomer;
-import com.efeerturk.dto.DtoCustomerIU;
 import com.efeerturk.exception.BaseException;
 import com.efeerturk.exception.ErrorMessage;
 import com.efeerturk.exception.MessageType;
@@ -74,5 +77,31 @@ public class CustomerServiceImpl implements ICustomerService{
 		return dtoCustomer;
 	}
 
-	
+	@Override
+	public RestPageableEntity<DtoCustomer> findAllPageable(Pageable pageable) {
+		Page<Customer>customerPage=customerRepository.findAllPageable(pageable);
+		List<DtoCustomer>dtoCustomerList=new ArrayList<>();
+		for (Customer customer:customerPage.getContent()){
+			DtoCustomer dtoCustomer=new DtoCustomer();
+
+			BeanUtils.copyProperties(customer,dtoCustomer);
+			if (customer.getAccount() != null) {
+				DtoAccount dtoAccount=new DtoAccount();
+				BeanUtils.copyProperties(customer.getAccount(),dtoAccount);
+				dtoAccount.setCurrencyType(customer.getAccount().getCurrencyType());
+				dtoCustomer.setAccount(dtoAccount);
+			}
+			if (customer.getAddress() != null) {
+				DtoAddress dtoAddress=new DtoAddress();
+				BeanUtils.copyProperties(customer.getAddress(),dtoAddress);
+				dtoCustomer.setAddress(dtoAddress);
+			}
+
+			dtoCustomerList.add(dtoCustomer);
+		}
+		return PagerUtil.toPageableResponse(customerPage,dtoCustomerList);
+
+	}
+
+
 }

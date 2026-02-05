@@ -2,11 +2,16 @@ package com.efeerturk.service.impl;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
+import com.efeerturk.utils.RestPageableEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.efeerturk.dto.CurrencyRatesResponse;
@@ -135,8 +140,10 @@ public class SaledCarServiceImpl implements ISaledCarService {
 		
 		return toDTO(savedSaledCar);
 	}
-	
-	
+
+
+
+
 	public DtoSaledCar toDTO(SaledCar saledCar) {
 		DtoSaledCar dtoSaledCar = new DtoSaledCar();
 		DtoCustomer dtoCustomer = new DtoCustomer();

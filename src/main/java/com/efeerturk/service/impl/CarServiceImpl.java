@@ -1,9 +1,15 @@
 package com.efeerturk.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import com.efeerturk.utils.PagerUtil;
+import com.efeerturk.utils.RestPageableEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.efeerturk.dto.DtoCar;
@@ -35,6 +41,18 @@ public class CarServiceImpl implements ICarService{
 		BeanUtils.copyProperties(savedCar, dtoCar);
 		return dtoCar;
 	}
+	@Override
+	public RestPageableEntity<DtoCar>findAllPageable(Pageable pageable){
 
-	
+		Page<Car>carPage=carRepository.findAllPageable(pageable);
+		List<DtoCar>dtoCarList=new ArrayList<>();
+		for (Car car:carPage.getContent()){
+			DtoCar dtoCar=new DtoCar();
+			BeanUtils.copyProperties(car,dtoCar);
+			dtoCar.setCarStatusType(car.getCarStatusType());
+			dtoCar.setCurrencyType(car.getCurrencyType());
+			dtoCarList.add(dtoCar);
+		}
+		return PagerUtil.toPageableResponse(carPage,dtoCarList);
+	}
 }

@@ -12,7 +12,7 @@ import lombok.Setter;
 @Data
 public class DtoCar extends DtoBase{
 
-	private String plaka;
+	private String plate;
 
 	private String brand;
 
