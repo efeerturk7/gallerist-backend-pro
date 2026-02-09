@@ -1,118 +1,123 @@
-# 🚗 Gallerist - Car Gallery Management System
-## 🚀 Refactoring Update (Feb 2026) - Architecture & Performance Overhaul
+# 🚗 Gallerist - Cloud-Native Car Gallery API
 
-Major architectural improvements have been implemented to align the project with modern Spring Boot best practices. The codebase has been migrated from legacy patterns to a cleaner, type-safe, and more robust structure.
+![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-green?style=for-the-badge&logo=springboot)
+![Docker](https://img.shields.io/badge/Docker-Containerized-blue?style=for-the-badge&logo=docker)
+![MySQL](https://img.shields.io/badge/MySQL-Aiven_Cloud-003545?style=for-the-badge&logo=mysql)
+![Deployment](https://img.shields.io/badge/Deploy-Render-purple?style=for-the-badge&logo=render)
 
-### 🛠 Key Technical Improvements
+**Gallerist** is a robust, cloud-native Backend REST API designed to manage car gallery operations.
 
-* **Dependency Injection Strategy:**
-   * Migrated from Field Injection (`@Autowired`) to **Constructor Injection** using Lombok's `@RequiredArgsConstructor` and `private final` fields.
-   * This ensures immutability, prevents `NullPointerException` at runtime, and improves testability.
-
-* **DTO <-> Entity Mapping:**
-   * Removed `BeanUtils` (reflection-based) to eliminate performance overhead and runtime errors.
-   * Integrated **MapStruct** for type-safe, compile-time mapping generation.
-   * Implemented specific `IU` (Insert/Update) DTOs to strictly control input data.
-
-* **Service Layer Optimization:**
-   * Refactored business logic to include strict validation (`findById` checks) before entity creation to prevent foreign key constraint violations.
-   * Eliminated boilerplate code (manual setters/getters) and nested loops using Java Stream API.
-   * Standardized return value handling for repository `save()` operations to ensure data consistency.
-
-* **Clean Code Principles:**
-   * Adopted "Fail Fast" approach for exception handling.
-   * Improved readability and maintainability across all Service and Controller classes.
-
-**Gallerist** is a robust, containerized Backend REST API designed to manage car gallery operations. This project demonstrates a modern, secure, and scalable software architecture using **Spring Boot** and **Docker**.
-
-It has recently undergone a **major architectural refactoring** to ensure industry standards, including full Docker containerization, enhanced security protocols, and strict data validation layers.
+Built with **Spring Boot 3** and **Docker**, this project demonstrates a modern, secure, and scalable software architecture. It has been fully refactored to meet industry standards, containerized for portability, and deployed to a live cloud environment.
 
 ---
 
-## 🚀 Key Features & Architectural Improvements
+## 🔗 LIVE DEMO
 
-This project is not just a CRUD application; it focuses on clean code principles and secure data handling.
+The API is currently live and running on the cloud! You can test all endpoints directly via the interactive Swagger UI:
 
-### 🐳 1. Full Dockerization (Infrastructure as Code)
-- The entire application (App + Database) is containerized using **Docker** and **Docker Compose**.
-- **Zero-Configuration Setup:** No need to install Java or PostgreSQL locally. Just run `docker-compose up`, and the system is live.
-- **Port Isolation:** Configured to run on specific ports to avoid conflicts with local environments (`App: 8081`, `DB: 5433`).
+👉 **[CLICK HERE TO ACCESS LIVE SWAGGER UI](https://gallerist-app.onrender.com/swagger-ui/index.html)**
 
-### 🔒 2. Enhanced Security (JWT & Auth)
-- **Stateful to Stateless:** Migrated to a stateless authentication mechanism using **JSON Web Tokens (JWT)**.
-- **Security Refactoring:** Completely rewrote the `SecurityConfig` to handle `401 Unauthorized` errors gracefully and opened specific endpoints (Swagger, Auth) while securing business logic.
-- **Custom Filters:** Implemented optimized JWT Authentication filters for request interception.
+---
 
-### 🛡️ 3. Robust Validation & Error Handling
-- **Strict DTO Validation:** Input data is strictly validated using `Jakarta Validation` constraints (e.g., NotNull, Size, Pattern) before reaching the service layer.
-- **Service Layer Improvements:** Refactored business logic to ensure data integrity (e.g., checking foreign key existence before insertion).
-- **Global Exception Handling:** Centralized error management to return meaningful HTTP status codes and messages to the client.
+## 🚀 Major Refactoring Update (Feb 2026)
+
+This project has undergone a significant architectural overhaul, migrating from a legacy local setup to a fully containerized cloud environment.
+
+### 🛠 Key Technical Improvements
+
+* **Cloud Migration (Render & Aiven):**
+  * The application is containerized with **Docker** (Multi-Stage Build) and deployed on **Render**.
+  * The database was migrated from local storage to a managed **MySQL** instance on **Aiven Cloud**, ensuring high availability and accessibility.
+
+* **Clean Code & Architecture:**
+  * **Dependency Injection:** Migrated from Field Injection (`@Autowired`) to **Constructor Injection** using Lombok's `@RequiredArgsConstructor`. This ensures immutability and testability.
+  * **DTO Mapping:** Replaced reflection-based `BeanUtils` with **MapStruct** for type-safe, compile-time mapping generation.
+  * **Fail-Fast Validation:** Implemented strict service-layer validations to prevent data integrity issues before they reach the database.
+
+* **Security Enhancements:**
+  * Implemented a stateless authentication mechanism using **JWT (JSON Web Tokens)**.
+  * Refactored `SecurityFilterChain` to handle public (Swagger, Auth) and protected (Business Logic) endpoints efficiently.
+
+---
+
+## 🏗 System Architecture
+
+The project follows a layered architecture with a focus on separation of concerns.
+
+### 🐳 1. Docker & Containerization
+- The application uses a **Multi-Stage Dockerfile** (Maven Build + OpenJDK Runtime) to create a lightweight and optimized production image.
+- `docker-compose.yml` is configured for local development, orchestrating the app and database containers with a single command.
+
+### ☁️ 2. Cloud-Native Database
+- Unlike traditional setups, this project does not rely on a local database server.
+- It connects securely to a **Managed MySQL Database** on Aiven, mimicking a real-world production environment.
+
+### 🛡️ 3. Security Implementation
+- **JWT Filters:** Custom filters intercept every request to validate tokens.
+- **Role-Based Access:** The architecture supports scalable role-based authorization (e.g., Admin vs. User).
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Language:** Java 17
-- **Framework:** Spring Boot 3.x
-- **Database:** PostgreSQL 16 (Containerized)
+- **Language:** Java 21 (LTS)
+- **Framework:** Spring Boot 3.2.x
+- **Database:** MySQL (Aiven Cloud)
 - **Containerization:** Docker & Docker Compose
-- **Security:** Spring Security, JWT (JJWT)
+- **Cloud Provider:** Render
+- **Security:** Spring Security 6, JWT (JJWT)
+- **Object Mapping:** MapStruct
 - **Documentation:** OpenAPI / Swagger UI
 - **Build Tool:** Maven
 
 ---
 
-## ⚙️ Installation & Setup (The "One-Click" Way)
+## ⚙️ How to Run Locally (Docker)
 
-You don't need to install a database or configure environment variables manually. Docker handles everything.
+Since the project is fully Dockerized, you don't need to install Java or MySQL on your machine.
 
-### Prerequisites
-- Docker Desktop (Running)
-
-### Steps
 1. **Clone the repository:**
    ```bash
    git clone [https://github.com/efeerturk7/gallerist-backend-pro.git](https://github.com/efeerturk7/gallerist-backend-pro.git)
    cd gallerist-backend-pro
-Run with Docker Compose: Open your terminal in the project root and run:
+Run with Docker Compose:
 
 Bash
 docker-compose up -d
-Wait for it: Give it 15-20 seconds for the Database and Java Application to initialize.
+This command will pull the necessary images and start the application on port 8081.
 
-📖 API Documentation (Swagger UI)
-Once the application is running, you can access the interactive API documentation to test endpoints directly.
+Access the API: Go to: http://localhost:8081/swagger-ui/index.html
 
-👉 Access Swagger UI: http://localhost:8081/swagger-ui/index.html
+🧪 Authentication Flow (How to Test)
+The system is secured. To test protected endpoints (like adding a car or address), follow these steps in Swagger UI:
 
-🔑 How to Test (Authentication Flow)
-Since the system is secured with JWT, follow this flow:
+Register:
 
-Register: Go to rest-authentication-controller -> /register and create a new user.
+Go to Authentication Controller -> /rest/auth/register.
 
-Login: Go to /authenticate with your credentials.
+Create a new user.
 
-Copy Token: Copy the accessToken from the response body (do not include quotes).
+Login:
 
-Authorize: Click the Authorize 🔓 button at the top right of Swagger, paste the token, and click Authorize.
+Go to /rest/auth/login and enter your credentials.
 
-Test Endpoints: Now you can access protected routes like Car Controller or Customer Controller.
+Copy the accessToken from the response body (exclude the quotes).
 
-💾 Database Access (Optional)
-If you want to inspect the database directly using a tool like DBeaver or pgAdmin:
+Authorize:
 
-Host: localhost
+Click the Authorize 🔓 button at the top right.
 
-Port: 5433 (Mapped externally)
+Paste the token (e.g., Bearer eyJhbGci...).
 
-Database: gallerist_db
+Click Authorize -> Close.
 
-Username: postgres
+Success:
 
-Password: 1 (or as defined in compose.yaml)
+Now you can execute requests in Address Controller or Car Controller.
 
 👨‍💻 Author
-[Bahadır Efe ERTÜRK] - Backend Developer
+Bahadır Efe ERTÜRK - Backend Developer
 
 LinkedIn Profile
 https://www.linkedin.com/in/efeerturk7/
