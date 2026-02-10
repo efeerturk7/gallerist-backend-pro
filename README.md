@@ -16,7 +16,7 @@ Built with **Spring Boot 3** and **Docker**, this project demonstrates a modern,
 
 The API is currently live and running on the cloud! You can test all endpoints directly via the interactive Swagger UI:
 
-👉 **[CLICK HERE TO ACCESS LIVE SWAGGER UI](https://gallerist-app.onrender.com/swagger-ui/index.html)**
+👉 **[CLICK HERE TO ACCESS LIVE SWAGGER UI](https://gallerist-backend-pro.onrender.com/swagger-ui/index.html)**
 
 ---
 
