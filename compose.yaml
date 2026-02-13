@@ -28,6 +28,15 @@ services:
       - SPRING_JPA_PROPERTIES_HIBERNATE_HBM2DDL_CREATE_NAMESPACES=true
     depends_on:
       - postgres
+  redis:
+          image: redis:alpine
+          container_name: gallerist-redis
+          ports:
+            - "6379:6379"
+          volumes:
+            - redis_data:/data
+          restart: always
 
 volumes:
   postgres_data_clean:
+  redis_data:
