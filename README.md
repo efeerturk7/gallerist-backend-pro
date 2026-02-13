@@ -46,6 +46,55 @@ This project has evolved into a production-grade system with the integration of 
 
 The project follows a modern DevOps workflow:
 
+Markdown
+# 🚗 Gallerist - Cloud-Native Car Gallery API with CI/CD
+
+![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-green?style=for-the-badge&logo=springboot)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Render-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-Caching-DC382D?style=for-the-badge&logo=redis&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI%2FCD-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
+![Deployment](https://img.shields.io/badge/Deploy-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
+
+**Gallerist** is a robust, cloud-native Backend REST API designed to manage car gallery operations.
+
+Built with **Spring Boot 3**, **Docker**, and **Redis**, this project demonstrates a modern, secure, and scalable software architecture. It features a fully automated **CI/CD pipeline**, high-performance caching, and is deployed to a live cloud environment.
+
+---
+
+## 🔗 LIVE DEMO
+
+The API is currently live and running on the cloud! You can test all endpoints directly via the interactive Swagger UI:
+
+👉 **[CLICK HERE TO ACCESS LIVE SWAGGER UI](https://gallerist-backend-pro.onrender.com/swagger-ui/index.html)**
+
+---
+
+## 🚀 DevOps & Performance Update (Feb 2026)
+
+This project has evolved into a production-grade system with the integration of DevOps practices and performance optimizations.
+
+### 🛠 Key Technical Improvements
+
+* **⚡ Automated CI/CD Pipeline:**
+  * Implemented **GitHub Actions** to automate the build and deployment process.
+  * Every push to the `main` branch triggers a workflow that builds the application, pushes the Docker image to **Docker Hub**, and automatically deploys the new version to **Render**.
+
+* **🚀 High-Performance Caching (Redis):**
+  * Integrated **Redis** to implement caching mechanisms, significantly reducing database load and improving API response times for frequently accessed data.
+  * Configured **Redis Pub/Sub** infrastructure (ready for event-driven messaging).
+
+* **🐳 Containerization & Registry:**
+  * Migrated to **Docker Hub** for centralized image management.
+  * The application runs in a consistent environment from local development to production.
+
+---
+
+## 🏗 System Architecture & CI/CD Flow
+
+The project follows a modern DevOps workflow:
+
 ```mermaid
 graph LR
     A[💻 Developer Push] -->|GitHub| B(🚀 GitHub Actions)
