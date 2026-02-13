@@ -102,8 +102,9 @@ graph LR
     C -->|Yes| D[🐳 Build Docker Image]
     D -->|Push| E[📦 Docker Hub Registry]
     E -->|Pull & Deploy| F[☁️ Render Cloud]
-    F -->|Connect| G[(🐘 PostgreSQL)]
-    F -->|Cache| H[(⚡ Redis)]
+    F -->|Connect| G[("🐘 PostgreSQL")]
+    F -->|Cache| H[("⚡ Redis")]
+    
 1. Cloud-Native Storage
 Database: Migrated to PostgreSQL (hosted on Render) for robust relational data management.
 
