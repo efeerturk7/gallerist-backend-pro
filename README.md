@@ -22,84 +22,24 @@ The API is live on Render Cloud! You can test all endpoints via the interactive 
 
 ---
 
-## 🏗 System Architecture & Workflow
+## 🏗 System Architecture
 
 The diagram below illustrates the continuous deployment flow and the runtime architecture.
 
 ```mermaid
-graph LR
-    subgraph CI_CD_Pipeline ["🚀 CI/CD Pipeline"]
-        Push[("💻 Code Push")] --> Actions[("⚙️ GitHub Actions")]
-        Actions -->|Build| Image[("🐳 Build Docker Image")]
-        Image -->|Push| Hub[("📦 Docker Hub Registry")]
+graph TD
+    User([User / Client]) -->|HTTP Request| Render[Render Cloud Platform]
+    
+    subgraph Services
+        Render -->|Forward| App[Spring Boot Application]
+        App -->|Read/Write| DB[(PostgreSQL Database)]
+        App -->|Cache| Redis[(Redis Cache)]
     end
-
-    subgraph Cloud_Runtime ["☁️ Cloud Runtime (Render)"]
-        Hub -->|Pull & Deploy| App[("☕ Spring Boot App")]
-        App -->|Read/Write| DB[("🐘 PostgreSQL DB")]
-        App -->|Cache| Cache[("⚡ Redis Cache")]
-    end
-
-## 🚀 Key Technical Features (Feb 2026 Update)
-
-This project has been refactored from a monolithic local app to a distributed cloud system.
-
-### 1. ⚡ Performance & Caching (Redis)
-* Implemented **Redis** to cache frequently accessed data.
-* Reduced database load and improved API response times significantly.
-* Configured **Redis Pub/Sub** infrastructure for future event-driven features.
-
-### 2. 🤖 Automated CI/CD (GitHub Actions)
-* **Zero-Touch Deployment:** Every commit to the `main` branch triggers an automated workflow.
-* The pipeline builds the JAR, creates a Docker image, pushes it to Docker Hub, and triggers a redeploy on Render.
-
-### 3. ☁️ Cloud-Native Database (PostgreSQL)
-* Migrated from local storage to a managed **PostgreSQL** instance on Render.
-* Ensures high availability and data persistence in a production environment.
-
-### 4. 🐳 Full Containerization (Docker)
-* Uses a **Multi-Stage Dockerfile** to minimize image size.
-* Ensures the application runs identically on a developer's machine and the cloud server.
-
----
-
-## 🛠️ Tech Stack
-
-| Category | Technology |
-| :--- | :--- |
-| **Language** | Java 21 (LTS) |
-| **Framework** | Spring Boot 3.2.x |
-| **Database** | PostgreSQL (Render Managed) |
-| **Caching** | Redis (Render Key-Value) |
-| **DevOps** | Docker, GitHub Actions, Docker Hub |
-| **Cloud** | Render (PaaS) |
-| **Security** | Spring Security 6, JWT |
-| **Docs** | OpenAPI / Swagger UI |
-
----
-
-## ⚙️ How to Run Locally
-
-Since the project is Dockerized, you can run the entire stack (App + DB + Redis) with a single command.
-
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/efeerturk7/gallerist-backend-pro.git](https://github.com/efeerturk7/gallerist-backend-pro.git)
-    cd gallerist-backend-pro
-    ```
-
-2.  **Start with Docker Compose:**
-    ```bash
-    docker-compose up -d
-    ```
-
-3.  **Access the App:**
-    * Swagger UI: `http://localhost:8081/swagger-ui/index.html`
-
----
-
-### 👨‍💻 Author
-**Bahadır Efe ERTÜRK** - Backend Developer
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/efeerturk7/)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/efeerturk7)
+    
+    GitHub[GitHub Repo] -->|Push Code| Actions[GitHub Actions CI/CD]
+    Actions -->|Build & Push Image| DockerHub[Docker Hub Registry]
+    DockerHub -->|Pull Image| Render
+🚀 Key Technical Features (Feb 2026 Update)This project has been refactored from a monolithic local app to a distributed cloud system.1. ⚡ Performance & Caching (Redis)Implemented Redis to cache frequently accessed data.Reduced database load and improved API response times significantly.Configured Redis Pub/Sub infrastructure for future event-driven features.2. 🤖 Automated CI/CD (GitHub Actions)Zero-Touch Deployment: Every commit to the main branch triggers an automated workflow.The pipeline builds the JAR, creates a Docker image, pushes it to Docker Hub, and triggers a redeploy on Render.3. ☁️ Cloud-Native Database (PostgreSQL)Migrated from local storage to a managed PostgreSQL instance on Render.Ensures high availability and data persistence in a production environment.4. 🐳 Full Containerization (Docker)Uses a Multi-Stage Dockerfile to minimize image size.Ensures the application runs identically on a developer's machine and the cloud server.🛠️ Tech StackCategoryTechnologyLanguageJava 21 (LTS)FrameworkSpring Boot 3.2.xDatabasePostgreSQL (Render Managed)CachingRedis (Render Key-Value)DevOpsDocker, GitHub Actions, Docker HubCloudRender (PaaS)SecuritySpring Security 6, JWTDocsOpenAPI / Swagger UI⚙️ How to Run LocallySince the project is Dockerized, you can run the entire stack (App + DB + Redis) with a single command.Clone the repository:Bashgit clone [https://github.com/efeerturk7/gallerist-backend-pro.git](https://github.com/efeerturk7/gallerist-backend-pro.git)
+cd gallerist-backend-pro
+Start with Docker Compose:Bashdocker-compose up -d
+Access the App:Swagger UI: http://localhost:8081/swagger-ui/index.html👨‍💻 AuthorBahadır Efe ERTÜRK - Backend Developer
