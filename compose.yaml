@@ -1,5 +1,4 @@
 services:
-
   postgres:
     image: 'postgres:16'
     container_name: gallerist-db
@@ -8,34 +7,37 @@ services:
       - 'POSTGRES_PASSWORD=1'
       - 'POSTGRES_USER=postgres'
     ports:
-      - '5433:5432'
+      - '5432:5432'
     volumes:
       - postgres_data_clean:/var/lib/postgresql/data
-
-
   app:
-    image: 'efe/gallerist:v1'
+    image: 'gallerist-backend:latest'
     container_name: gallerist-app
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - '8081:8080'
     environment:
 
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
-      - SPRING_DATASOURCE_PASSWORD=1
       - SPRING_DATASOURCE_USERNAME=postgres
-
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-      - SPRING_JPA_PROPERTIES_HIBERNATE_HBM2DDL_CREATE_NAMESPACES=true
+      - SPRING_DATASOURCE_PASSWORD=1
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
     depends_on:
       - postgres
+      - redis
+    restart: on-failure
+
   redis:
-          image: redis:alpine
-          container_name: gallerist-redis
-          ports:
-            - "6379:6379"
-          volumes:
-            - redis_data:/data
-          restart: always
+    image: 'redis:alpine'
+    container_name: gallerist-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
 
 volumes:
   postgres_data_clean:

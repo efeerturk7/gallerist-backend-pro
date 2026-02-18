@@ -8,7 +8,10 @@ import com.efeerturk.gallery_project.utils.RestPageableRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/gallery/car")
@@ -24,8 +27,11 @@ public class RestCarController extends RestBaseController {
     }
 
     @GetMapping("/findAll")
-
     public RootEntity<RestPageableEntity<DtoCar>> findAllPageable(@Valid @ModelAttribute RestPageableRequest request) {
         return ok(carService.findAllPageable(toPageable(request)));
+    }
+    @GetMapping("/{brand}")
+    public RootEntity<List<DtoCar>>getCars(@PathVariable(name = "brand") String brandInput){
+        return RootEntity.ok(carService.findByBrand(brandInput));
     }
 }

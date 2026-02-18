@@ -10,7 +10,7 @@
 
 **Gallerist** is a production-ready, cloud-native REST API designed for managing car gallery operations.
 
-This project demonstrates a modern **DevOps-oriented architecture**. It is fully containerized with **Docker**, uses **Redis** for high-performance caching, stores data in **PostgreSQL**, and is automatically deployed via a **CI/CD pipeline** using GitHub Actions.
+This project demonstrates a modern **DevOps-oriented architecture**. It is fully containerized with **Docker**, uses **Redis** for advanced caching strategies, stores data in **PostgreSQL**, and is automatically deployed via a **CI/CD pipeline** using GitHub Actions.
 
 ---
 
@@ -42,12 +42,19 @@ How the application works in production:
 
 ## 🚀 Key Technical Features (Feb 2026 Update)
 
-This project has been refactored from a monolithic local app to a distributed cloud system.
+This project has been refactored from a monolithic local app to a distributed cloud system with a heavy focus on performance.
 
-### 1. ⚡ Performance & Caching (Redis)
-* Implemented **Redis** to cache frequently accessed data.
-* Reduced database load and improved API response times significantly.
-* Configured **Redis Pub/Sub** infrastructure for future event-driven features.
+### 1. ⚡ Advanced Caching Strategy (Redis Implementation)
+The caching mechanism is not just a simple store; it implements the **Cache-Aside Pattern** and **Smart Invalidation**:
+
+* **Custom Serialization (`RedisConfig`):**
+    * Implemented a custom `RedisTemplate` using `GenericJackson2JsonRedisSerializer`.
+    * Data is stored as human-readable **JSON** instead of default binary hex, making debugging and maintenance easier.
+* **Service Abstraction (`RedisService`):**
+    * Created a dedicated wrapper service encapsulating core Redis operations: `set` (with TTL), `get`, and `delete`.
+* **Smart Caching Logic (`CarService`):**
+    * **Read Operations (`findByBrand` & Pagination):** First checks Redis. If a **Cache Hit** occurs, data returns instantly. If a **Cache Miss** occurs, it fetches from PostgreSQL, saves to Redis with a specific TTL (Time-To-Live), and returns the data.
+    * **Write Operations (`save`):** Implemented **Cache Eviction**. When a new car is added or updated, the `delete` method is triggered to invalidate old cache entries. This ensures data consistency and prevents serving stale data.
 
 ### 2. 🤖 Automated CI/CD (GitHub Actions)
 * **Zero-Touch Deployment:** Every commit to the `main` branch triggers an automated workflow.
@@ -71,6 +78,7 @@ This project has been refactored from a monolithic local app to a distributed cl
 | **Framework** | Spring Boot 3.2.x |
 | **Database** | PostgreSQL (Render Managed) |
 | **Caching** | Redis (Render Key-Value) |
+| **Serialization** | Jackson (JSON for Redis) |
 | **DevOps** | Docker, GitHub Actions, Docker Hub |
 | **Cloud** | Render (PaaS) |
 | **Security** | Spring Security 6, JWT |

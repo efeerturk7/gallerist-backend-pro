@@ -5,8 +5,11 @@ import com.efeerturk.gallery_project.dto.DtoCarIU;
 import com.efeerturk.gallery_project.model.Car;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface ICarMapper {
     DtoCar toDto(Car car);
     Car toEntity(DtoCarIU carIU);
+    List<DtoCar>toDtoList(List<Car>carList);
 }
