@@ -4,7 +4,7 @@ import com.efeerturk.gallery_project.model.BaseEntity;
 import lombok.Data;
 
 @Data
-public class DtoGalleristCar extends BaseEntity {
+public class DtoGalleristCar extends DtoBase {
     private DtoGallerist gallerist;
 
     private DtoCar car;

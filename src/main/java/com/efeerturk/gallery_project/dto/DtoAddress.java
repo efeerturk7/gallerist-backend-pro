@@ -4,7 +4,7 @@ import com.efeerturk.gallery_project.model.BaseEntity;
 import lombok.Data;
 
 @Data
-public class DtoAddress extends BaseEntity {
+public class DtoAddress extends DtoBase {
     private String city;
 
     private String district;

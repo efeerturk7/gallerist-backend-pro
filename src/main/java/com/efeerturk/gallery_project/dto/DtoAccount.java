@@ -6,7 +6,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 @Data
-public class DtoAccount extends BaseEntity {
+public class DtoAccount extends DtoBase {
     private String accountNo;
 
     private String iban;

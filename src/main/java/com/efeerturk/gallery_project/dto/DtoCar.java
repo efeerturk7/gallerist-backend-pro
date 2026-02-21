@@ -7,7 +7,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 @Data
-public class DtoCar extends BaseEntity {
+public class DtoCar extends DtoBase {
     private String plate;
 
     private String brand;

@@ -5,7 +5,7 @@ import lombok.Data;
 
 import java.util.Date;
 @Data
-public class DtoCustomer extends BaseEntity {
+public class DtoCustomer extends DtoBase {
     private String firstName;
 
     private String lastName;
