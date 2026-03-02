@@ -7,17 +7,19 @@ import com.efeerturk.gallery_project.dto.RefreshTokenRequest;
 import com.efeerturk.gallery_project.service.AuthenticationService;
 import jakarta.validation.Valid;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 
 public class RestAuthenticationController extends RestBaseController {
 
-    @Autowired
-    private AuthenticationService authenticationService;
+
+    private final AuthenticationService authenticationService;
 
     @PostMapping("/register")
 

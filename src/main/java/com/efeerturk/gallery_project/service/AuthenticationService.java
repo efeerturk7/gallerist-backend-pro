@@ -30,15 +30,11 @@ public class AuthenticationService {
 
     private final UserRepository userRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
 
+    private final BCryptPasswordEncoder passwordEncoder;
 
+    private final JWTService jwtService;
 
-    @Autowired
-    private JWTService jwtService;
-
-    @Autowired
     private final RefreshTokenRepository refreshTokenRepository;
 
     private User createUser(AuthRequest input) {

@@ -5,6 +5,7 @@ import com.efeerturk.gallery_project.exception.BaseException;
 import com.efeerturk.gallery_project.exception.ErrorMessage;
 import com.efeerturk.gallery_project.model.User;
 import com.efeerturk.gallery_project.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,9 +20,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.Optional;
 
 @Configuration
+@RequiredArgsConstructor
 public class AppConfig {
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
 
     @Bean
     public UserDetailsService userDetailsService() {

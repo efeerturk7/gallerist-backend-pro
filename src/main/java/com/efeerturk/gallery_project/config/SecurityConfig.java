@@ -2,6 +2,7 @@ package com.efeerturk.gallery_project.config;
 
 import com.efeerturk.gallery_project.handler.AuthEntryPoint;
 import com.efeerturk.gallery_project.jwt.JWTAuthenticationFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
     public static final String REGISTER = "/register";
     public static final String AUTHENTICATE = "/authenticate";
@@ -22,11 +24,11 @@ public class SecurityConfig {
 
 
 
-    @Autowired
-    private JWTAuthenticationFilter jwtAuthenticationFilter;
 
-    @Autowired
-    private AuthEntryPoint authEntryPoint;
+    private final JWTAuthenticationFilter jwtAuthenticationFilter;
+
+
+    private final AuthEntryPoint authEntryPoint;
 
     public static final String[] SWAGGER_PATHS  = {
             "/swagger-ui/**",
