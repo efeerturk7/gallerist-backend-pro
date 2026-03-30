@@ -1,7 +1,8 @@
 package com.efeerturk.gallery_project.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-
+@AllArgsConstructor
 @Getter
 public enum MessageType {
 
@@ -21,9 +22,4 @@ public enum MessageType {
 
     private String code;
     private String message;
-
-    MessageType(String code , String message) {
-        this.code =code;
-        this.message = message;
-    }
 }
