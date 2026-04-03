@@ -3,7 +3,8 @@ package com.efeerturk.gallery_project.mocking;
 import com.efeerturk.gallery_project.dto.DtoCar;
 import com.efeerturk.gallery_project.model.Car;
 import com.efeerturk.gallery_project.repository.CarRepository;
-import com.efeerturk.gallery_project.service.CarService;
+import com.efeerturk.gallery_project.service.ICarService;
+import com.efeerturk.gallery_project.service.impl.CarService;
 import com.efeerturk.gallery_project.utils.RestPageableEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +28,7 @@ public class CarServiceTest {
     private CarRepository carRepository;
 
     @InjectMocks
-    private CarService carService;
+    private ICarService carService;
     @Test
     void findAllPageable_ShouldReturnRestPageableEntity_WhenCarsExist() {
         Pageable pageable = PageRequest.of(0, 5);

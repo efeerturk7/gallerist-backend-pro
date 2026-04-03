@@ -6,7 +6,8 @@ import com.efeerturk.gallery_project.model.Account;
 import com.efeerturk.gallery_project.model.Address;
 import com.efeerturk.gallery_project.model.Customer;
 import com.efeerturk.gallery_project.repository.CustomerRepository;
-import com.efeerturk.gallery_project.service.CustomerService;
+import com.efeerturk.gallery_project.service.ICustomerService;
+import com.efeerturk.gallery_project.service.impl.CustomerService;
 import com.efeerturk.gallery_project.utils.RestPageableEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +31,7 @@ public class CustomerServiceTest {
     private CustomerRepository customerRepository;
 
     @InjectMocks
-    private CustomerService customerService;
+    private ICustomerService customerService;
 
     @Test
     void findAllPageable_ShouldMapFullCustomer_WhenAccountAndAddressExist() {

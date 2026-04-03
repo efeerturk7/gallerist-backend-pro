@@ -2,7 +2,8 @@ package com.efeerturk.gallery_project.controller;
 
 import com.efeerturk.gallery_project.dto.DtoCustomer;
 import com.efeerturk.gallery_project.dto.DtoCustomerIU;
-import com.efeerturk.gallery_project.service.CustomerService;
+import com.efeerturk.gallery_project.service.ICustomerService;
+import com.efeerturk.gallery_project.service.impl.CustomerService;
 import com.efeerturk.gallery_project.utils.RestPageableEntity;
 import com.efeerturk.gallery_project.utils.RestPageableRequest;
 import jakarta.validation.Valid;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class RestCustomerController extends RestBaseController{
 
-    private final CustomerService customerService;
+    private final ICustomerService customerService;
 
     @PostMapping("/save")
 

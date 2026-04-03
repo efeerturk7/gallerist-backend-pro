@@ -2,7 +2,8 @@ package com.efeerturk.gallery_project.controller;
 
 import com.efeerturk.gallery_project.dto.DtoGallerist;
 import com.efeerturk.gallery_project.dto.DtoGalleristIU;
-import com.efeerturk.gallery_project.service.GalleristService;
+import com.efeerturk.gallery_project.service.IGalleristService;
+import com.efeerturk.gallery_project.service.impl.GalleristService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -14,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("gallery/gallerist")
 @RequiredArgsConstructor
-public class RestGalleristController extends RestBaseController{
+public class RestGalleristController extends RestBaseController {
 
-    private final GalleristService galleristService;
+    private final IGalleristService galleristService;
 
     @PostMapping("/save")
 

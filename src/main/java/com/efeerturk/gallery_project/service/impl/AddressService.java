@@ -1,31 +1,28 @@
-package com.efeerturk.gallery_project.service;
+package com.efeerturk.gallery_project.service.impl;
 
 import com.efeerturk.gallery_project.dto.DtoAddress;
 import com.efeerturk.gallery_project.dto.DtoAddressIU;
 import com.efeerturk.gallery_project.mapper.IAdressMapper;
 import com.efeerturk.gallery_project.model.Address;
 import com.efeerturk.gallery_project.repository.AddressRepository;
+import com.efeerturk.gallery_project.service.IAddressService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
-public class AddressService {
+public class AddressService implements IAddressService {
     private final IAdressMapper adressMapper;
     private final AddressRepository addressRepository;
 
-
-    private Address createAddress(DtoAddressIU dtoAddressIU) {
+    @Override
+     public Address createAddress(DtoAddressIU dtoAddressIU) {
         Address address=adressMapper.toEntity(dtoAddressIU);
         return address;
 
     }
 
-
+    @Override
     public DtoAddress saveAddress(DtoAddressIU dtoAddressIU) {
         Address savedAddress = addressRepository.save(createAddress(dtoAddressIU));
         DtoAddress dtoAddress=adressMapper.toDto(savedAddress);

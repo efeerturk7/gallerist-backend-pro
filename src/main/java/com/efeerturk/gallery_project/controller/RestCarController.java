@@ -2,13 +2,13 @@ package com.efeerturk.gallery_project.controller;
 
 import com.efeerturk.gallery_project.dto.DtoCar;
 import com.efeerturk.gallery_project.dto.DtoCarIU;
-import com.efeerturk.gallery_project.service.CarService;
+import com.efeerturk.gallery_project.service.ICarService;
+import com.efeerturk.gallery_project.service.impl.CarService;
 import com.efeerturk.gallery_project.utils.RestPageableEntity;
 import com.efeerturk.gallery_project.utils.RestPageableRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RestCarController extends RestBaseController {
 
-    private final CarService carService;
+    private final ICarService carService;
 
     @PostMapping("/save")
 

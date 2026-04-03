@@ -1,4 +1,4 @@
-package com.efeerturk.gallery_project.service;
+package com.efeerturk.gallery_project.service.impl;
 
 import com.efeerturk.gallery_project.dto.*;
 import com.efeerturk.gallery_project.enums.CarStatusType;
@@ -12,6 +12,7 @@ import com.efeerturk.gallery_project.model.SaledCar;
 import com.efeerturk.gallery_project.repository.CarRepository;
 import com.efeerturk.gallery_project.repository.CustomerRepository;
 import com.efeerturk.gallery_project.repository.SaledCarRepository;
+import com.efeerturk.gallery_project.service.ISaledCarService;
 import com.efeerturk.gallery_project.utils.PagerUtil;
 import com.efeerturk.gallery_project.utils.RestPageableEntity;
 import lombok.RequiredArgsConstructor;
@@ -27,14 +28,14 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class SaledCarService {
+public class SaledCarService implements ISaledCarService {
     private final ISaledCarMapper saledCarMapper;
     private final SaledCarRepository saledCarRepository;
     private final CustomerRepository customerRepository;
     private CarRepository carRepository;
     private CurrencyRatesService currencyRatesService;
 
-
+    @Override
     public BigDecimal convertCustomerAmountToUSD(Customer customer) {
 
         CurrencyRatesResponse currencyRatesResponse = currencyRatesService
@@ -46,6 +47,7 @@ public class SaledCarService {
         return customerUSDAmount;
     }
 
+    @Override
     public boolean checkCarStatus(Long carId) {
         Optional<Car> optCar = carRepository.findById(carId);
         if (optCar.isPresent() && optCar.get().getCarStatusType().name().equals(CarStatusType.SALED.name())) {
@@ -54,6 +56,7 @@ public class SaledCarService {
         return true;
     }
 
+    @Override
     public BigDecimal remaningCustomerAmount(Customer customer, Car car) {
         BigDecimal customerUSDAmount = convertCustomerAmountToUSD(customer);
         BigDecimal remaningCustomerUSDAmount = customerUSDAmount.subtract(car.getPrice());
@@ -65,6 +68,7 @@ public class SaledCarService {
         return remaningCustomerUSDAmount.multiply(usd);
     }
 
+    @Override
     public boolean checkAmount(DtoSaledCarIU dtoSaledCarIU) {
 
         Optional<Customer> optCustomer = customerRepository.findById(dtoSaledCarIU.getCustomerId());
@@ -89,12 +93,12 @@ public class SaledCarService {
     }
 
     private SaledCar createSaledCar(DtoSaledCarIU dtoSaledCarIU) {
-        SaledCar saledCar= saledCarMapper.toEntity(dtoSaledCarIU);
-        SaledCar savedSaledCar=saledCarRepository.save(saledCar);
+        SaledCar saledCar = saledCarMapper.toEntity(dtoSaledCarIU);
+        SaledCar savedSaledCar = saledCarRepository.save(saledCar);
         return savedSaledCar;
     }
 
-
+    @Override
     public DtoSaledCar buyCar(DtoSaledCarIU dtoSaledCarIU) {
 
         if (!checkCarStatus(dtoSaledCarIU.getCarId())) {
@@ -118,17 +122,15 @@ public class SaledCarService {
         return saledCarMapper.toDto(savedSaledCar);
     }
 
-
+    @Override
     public RestPageableEntity<DtoSaledCar> findAllPageable(Pageable pageable) {
         Page<SaledCar> saledCarPage = saledCarRepository.findAllPageable(pageable);
-        List<DtoSaledCar>dtoSaledCarList=saledCarPage.getContent().stream()
-                .map(saledCarMapper ::toDto)
+        List<DtoSaledCar> dtoSaledCarList = saledCarPage.getContent().stream()
+                .map(saledCarMapper::toDto)
                 .collect(Collectors.toList());
-        return PagerUtil.toPageableResponse(saledCarPage,dtoSaledCarList);
+        return PagerUtil.toPageableResponse(saledCarPage, dtoSaledCarList);
 
     }
-
-
 
 
 }

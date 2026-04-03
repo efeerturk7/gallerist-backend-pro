@@ -1,7 +1,8 @@
 package com.efeerturk.gallery_project.controller;
 
 import com.efeerturk.gallery_project.dto.CurrencyRatesResponse;
-import com.efeerturk.gallery_project.service.CurrencyRatesService;
+import com.efeerturk.gallery_project.service.ICurrencyRatesService;
+import com.efeerturk.gallery_project.service.impl.CurrencyRatesService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class RestCurrencyRatesController extends RestBaseController {
 
-    private final CurrencyRatesService currencyRatesService;
+    private final ICurrencyRatesService currencyRatesService;
 
     @GetMapping("/currency-rates")
 

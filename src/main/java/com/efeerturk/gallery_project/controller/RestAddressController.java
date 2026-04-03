@@ -2,10 +2,10 @@ package com.efeerturk.gallery_project.controller;
 
 import com.efeerturk.gallery_project.dto.DtoAddress;
 import com.efeerturk.gallery_project.dto.DtoAddressIU;
-import com.efeerturk.gallery_project.service.AddressService;
+import com.efeerturk.gallery_project.service.IAddressService;
+import com.efeerturk.gallery_project.service.impl.AddressService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class RestAddressController extends RestBaseController {
 
-    private final AddressService addressService;
+    private final IAddressService addressService;
 
     @PostMapping("/save")
 

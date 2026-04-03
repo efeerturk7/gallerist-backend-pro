@@ -1,4 +1,4 @@
-package com.efeerturk.gallery_project.service;
+package com.efeerturk.gallery_project.service.impl;
 
 import com.efeerturk.gallery_project.dto.*;
 import com.efeerturk.gallery_project.enums.MessageType;
@@ -11,6 +11,7 @@ import com.efeerturk.gallery_project.model.GalleristCar;
 import com.efeerturk.gallery_project.repository.CarRepository;
 import com.efeerturk.gallery_project.repository.GalleristCarRepository;
 import com.efeerturk.gallery_project.repository.GalleristRepository;
+import com.efeerturk.gallery_project.service.IGalleristCarService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class GalleristCarService {
+public class GalleristCarService implements IGalleristCarService {
     private final IGalleristCarMapper galleristCarMapper;
     private final GalleristCarRepository galleristCarRepository;
     private final GalleristRepository galleristRepository;
@@ -48,7 +49,7 @@ public class GalleristCarService {
 
     }
 
-
+    @Override
     public DtoGalleristCar saveGalleristCar(DtoGalleristCarIU dtoGalleristCarIU) {
         GalleristCar savedGalleristCar=galleristCarRepository.save(createGalleristCar(dtoGalleristCarIU));
         return galleristCarMapper.toDto(savedGalleristCar);

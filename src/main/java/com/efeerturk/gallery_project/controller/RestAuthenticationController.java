@@ -4,11 +4,10 @@ import com.efeerturk.gallery_project.dto.AuthRequest;
 import com.efeerturk.gallery_project.dto.AuthResponse;
 import com.efeerturk.gallery_project.dto.DtoUser;
 import com.efeerturk.gallery_project.dto.RefreshTokenRequest;
-import com.efeerturk.gallery_project.service.AuthenticationService;
+import com.efeerturk.gallery_project.service.impl.AuthenticationService;
 import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

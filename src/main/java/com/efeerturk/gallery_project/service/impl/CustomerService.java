@@ -1,4 +1,4 @@
-package com.efeerturk.gallery_project.service;
+package com.efeerturk.gallery_project.service.impl;
 
 
 
@@ -14,6 +14,7 @@ import com.efeerturk.gallery_project.model.Customer;
 import com.efeerturk.gallery_project.repository.AccountRepository;
 import com.efeerturk.gallery_project.repository.AddressRepository;
 import com.efeerturk.gallery_project.repository.CustomerRepository;
+import com.efeerturk.gallery_project.service.ICustomerService;
 import com.efeerturk.gallery_project.utils.PagerUtil;
 import com.efeerturk.gallery_project.utils.RestPageableEntity;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerService {
+public class CustomerService implements ICustomerService {
     private final ICustomerMapper customerMapper;
 
     private final CustomerRepository customerRepository;
@@ -58,13 +59,13 @@ public class CustomerService {
         return customer;
     }
 
-
+    @Override
     public DtoCustomer saveCustomer(DtoCustomerIU dtoCustomerIU) {
        Customer savedCustomer=customerRepository.save(createCustomer(dtoCustomerIU));
        return customerMapper.toDto(savedCustomer);
     }
 
-
+    @Override
     public RestPageableEntity<DtoCustomer> findAllPageable(Pageable pageable) {
         Page<Customer> customerPage=customerRepository.findAllPageable(pageable);
         List<DtoCustomer> dtoCustomerList=customerPage.getContent()

@@ -2,7 +2,8 @@ package com.efeerturk.gallery_project.controller;
 
 import com.efeerturk.gallery_project.dto.DtoGalleristCar;
 import com.efeerturk.gallery_project.dto.DtoGalleristCarIU;
-import com.efeerturk.gallery_project.service.GalleristCarService;
+import com.efeerturk.gallery_project.service.IGalleristCarService;
+import com.efeerturk.gallery_project.service.impl.GalleristCarService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class RestGalleristCarController extends RestBaseController {
 
-    private final GalleristCarService galleristCarService;
+    private final IGalleristCarService galleristCarService;
 
     @PostMapping("/save")
 

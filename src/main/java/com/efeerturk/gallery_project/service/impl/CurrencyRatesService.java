@@ -1,9 +1,10 @@
-package com.efeerturk.gallery_project.service;
+package com.efeerturk.gallery_project.service.impl;
 
 import com.efeerturk.gallery_project.dto.CurrencyRatesResponse;
 import com.efeerturk.gallery_project.enums.MessageType;
 import com.efeerturk.gallery_project.exception.BaseException;
 import com.efeerturk.gallery_project.exception.ErrorMessage;
+import com.efeerturk.gallery_project.service.ICurrencyRatesService;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -13,8 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class CurrencyRatesService {
-
+public class CurrencyRatesService implements ICurrencyRatesService {
+    @Override
     public CurrencyRatesResponse getCurrencyRates(String startDate, String endDate) {
         String rootURL = "https://evds2.tcmb.gov.tr/service/evds/";
         String series = "TP.DK.USD.A";

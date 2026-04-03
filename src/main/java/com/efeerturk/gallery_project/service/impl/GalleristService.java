@@ -1,4 +1,4 @@
-package com.efeerturk.gallery_project.service;
+package com.efeerturk.gallery_project.service.impl;
 
 import com.efeerturk.gallery_project.dto.DtoGallerist;
 import com.efeerturk.gallery_project.dto.DtoGalleristIU;
@@ -10,6 +10,7 @@ import com.efeerturk.gallery_project.model.Address;
 import com.efeerturk.gallery_project.model.Gallerist;
 import com.efeerturk.gallery_project.repository.AddressRepository;
 import com.efeerturk.gallery_project.repository.GalleristRepository;
+import com.efeerturk.gallery_project.service.IGalleristService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class GalleristService {
+public class GalleristService implements IGalleristService {
     private final IGalleristMapper galleristMapper;
     private final GalleristRepository galleristRepository;
     private final AddressRepository addressRepository;
@@ -40,7 +41,7 @@ public class GalleristService {
 
     }
 
-
+    @Override
     public DtoGallerist saveGallerist(DtoGalleristIU dtoGalleristIU) {
         Gallerist savedGallerist=galleristRepository.save(createGallerist(dtoGalleristIU));
         return galleristMapper.toDto(savedGallerist);

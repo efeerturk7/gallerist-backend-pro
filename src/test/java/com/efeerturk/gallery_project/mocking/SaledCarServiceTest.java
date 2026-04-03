@@ -4,7 +4,8 @@ import com.efeerturk.gallery_project.model.Customer;
 import com.efeerturk.gallery_project.model.Gallerist;
 import com.efeerturk.gallery_project.model.SaledCar;
 import com.efeerturk.gallery_project.repository.SaledCarRepository;
-import com.efeerturk.gallery_project.service.SaledCarService;
+import com.efeerturk.gallery_project.service.ISaledCarService;
+import com.efeerturk.gallery_project.service.impl.SaledCarService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +24,7 @@ public class SaledCarServiceTest {
     @Mock
     private SaledCarRepository saledCarRepository;
     @InjectMocks
-    private SaledCarService saledCarService;
+    private ISaledCarService saledCarService;
     @Test
     void findAllPageable(){
         Pageable pageable= PageRequest.of(0,1);

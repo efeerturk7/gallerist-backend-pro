@@ -1,9 +1,10 @@
-package com.efeerturk.gallery_project.service;
+package com.efeerturk.gallery_project.service.impl;
 
 
 import com.efeerturk.gallery_project.enums.MessageType;
 import com.efeerturk.gallery_project.exception.BaseException;
 import com.efeerturk.gallery_project.exception.ErrorMessage;
+import com.efeerturk.gallery_project.service.IRedisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -17,9 +18,10 @@ import java.time.Duration;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class RedisService {
+public class RedisService implements IRedisService {
     private final RedisTemplate<String,Object>redisTemplate;
     private final ObjectMapper objectMapper;
+    @Override
     public void setValue(String key, Object value,long timeoutCache){
         try {
             String jsonValue=objectMapper.writeValueAsString(value);
@@ -30,6 +32,7 @@ public class RedisService {
             throw new BaseException(new ErrorMessage(MessageType.REDIS_WRITE_ERROR,key.toString()));
         }
     }
+    @Override
     public <T> T getValue(String key, TypeReference<T>typeReference){
         try{
             Object rValue=redisTemplate.opsForValue().get(key);
@@ -43,6 +46,7 @@ public class RedisService {
             throw new BaseException(new ErrorMessage(MessageType.REDIS_READ_ERROR,key.toString()));
         }
     }
+    @Override
     public void deleteValue(String key){
         try {
             redisTemplate.delete(key);

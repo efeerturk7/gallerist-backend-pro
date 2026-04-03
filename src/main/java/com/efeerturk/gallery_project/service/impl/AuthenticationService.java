@@ -1,4 +1,4 @@
-package com.efeerturk.gallery_project.service;
+package com.efeerturk.gallery_project.service.impl;
 
 import com.efeerturk.gallery_project.dto.AuthRequest;
 import com.efeerturk.gallery_project.dto.AuthResponse;
@@ -14,8 +14,6 @@ import org.springframework.beans.BeanUtils;
 import com.efeerturk.gallery_project.exception.BaseException;
 import com.efeerturk.gallery_project.exception.ErrorMessage;
 import com.efeerturk.gallery_project.enums.MessageType;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
